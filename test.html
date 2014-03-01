@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+	<title>Asynchronous gravatar image load using Knockoutjs</title>
+</head>
+<style>
+body{
+
+	background-color: #6D5C58 ; 
+
+}
+img
+{
+border: 2px solid #ddd;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+  -webkit-transition: all 0.2s ease-in-out;
+     -moz-transition: all 0.2s ease-in-out;
+       -o-transition: all 0.2s ease-in-out;
+          transition: all 0.2s ease-in-out;
+
+}
+input[type="text"]
+{
+	padding: 10px 14px 12px 14px;
+	background-color: #f2f2f2;border: 1px solid #c8c8c8;
+	width: 300px;
+	color: #838383;
+	margin: 10px 0 0 0;
+	font-size: 15px;
+}
+.container 
+{
+  text-align : center ;
+  margin-top: 70px ; 
+
+
+}
+</style>
+<body>
+
+<div class="container">
+  <img data-bind="attr : {src : imgs}" width="300" height="300"/>
+  <div>
+   <input data-bind="value: imgsrc,valueUpdate : 'keyup'" type="text" placeholder="your gravatar email goes here "/>
+  </div>
+</div>
+
+</body>
+
+<script src="knockout.js"></script>
+<script src="md5.min.js"></script>
+<script>
+
+var k = 
+{
+	imgsrc :ko.observable('')	
+};
+
+k.imgs = ko.computed(function (){
+	return 'http://www.gravatar.com/avatar/' + md5(k.imgsrc()) + '.jpg?s='+300
+});
+ko.applyBindings(k);
+</script>
+</html>
